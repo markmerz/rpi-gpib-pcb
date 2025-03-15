@@ -1,0 +1,82 @@
+
+(rules PCB my_raspi_gpib
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 5352)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.0)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.0)
+    )
+  )
+  (rule
+    (width 500.0)
+    (clear 400.0)
+    (clear 250.0 (type smd_to_turn_gap))
+    (clear 100.0 (type smd_smd))
+  )
+  (padstack "Via[0-1]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:300_um" "Via[0-1]_600:300_um" default
+  )
+  (via 
+    "Via[0-1]_600:300_um-kicad_default" "Via[0-1]_600:300_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:300_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    GND SHIELD +5V "Net-(D1-K)" GPIO04 "Net-(D2-K)" GPIO27 GPIO23
+    NDAC GPIO08 ATN GPIO09 GPIO24 GPIO11 NRFD GPIO18
+    SRQ IFC GPIO10 GPIO22 REN GPIO25 DAV EOI
+    DIO07 DIO03 DIO01 DIO08 DIO02 DIO05 DIO06 DIO04
+    GPIO13 +3.3V GPIO20 "unconnected-(J2-ID_SD_I2C0{slash}GPIO00-Pad27)" GPIO15 GPIO14 GPIO21 GPIO17
+    GPIO07 GPIO06 GPIO16 "unconnected-(J2-ID_SC_I2C0{slash}GPIO01-Pad28)" GPIO03 GPIO05 GPIO26 GPIO12
+    GPIO19 GPIO02
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 500.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)
